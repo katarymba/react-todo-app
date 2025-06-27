@@ -23,27 +23,27 @@
 ## Скриншоты
 
 <div align="center">
-  <img src="public/screenshots/1.png" alt="Главный экран приложения" width="500" style="margin:10px"/>
+  <img src="public/screenshots/1.png" alt="Главный экран приложения" width="800" style="margin:10px"/>
   <br/>
   <i>Рисунок 1. Главный экран: список ваших задач</i>
   <br/><br/>
   
-  <img src="public/screenshots/2.png" alt="Фильтрация задач" width="500" style="margin:10px"/>
+  <img src="public/screenshots/2.png" alt="Фильтрация задач" width="800" style="margin:10px"/>
   <br/>
   <i>Рисунок 2. Фильтрация: отображайте только активные или только выполненные задачи</i>
   <br/><br/>
   
-  <img src="public/screenshots/3.png" alt="Окно сортировки" width="500" style="margin:10px"/>
+  <img src="public/screenshots/3.png" alt="Окно сортировки" width="800" style="margin:10px"/>
   <br/>
   <i>Рисунок 3. Сортировка: выберите удобный для себя порядок задач</i>
   <br/><br/>
   
-  <img src="public/screenshots/4.png" alt="Кнопка при наведении" width="500" style="margin:10px"/>
+  <img src="public/screenshots/4.png" alt="Кнопка при наведении" width="800" style="margin:10px"/>
   <br/>
   <i>Рисунок 4. Кнопка при наведении: визуальный отклик для пользователя</i>
   <br/><br/>
   
-  <img src="public/screenshots/5.png" alt="Кнопка при нажатии" width="500" style="margin:10px"/>
+  <img src="public/screenshots/5.png" alt="Кнопка при нажатии" width="800" style="margin:10px"/>
   <br/>
   <i>Рисунок 5. Кнопка при нажатии: изменение цвета для подтверждения действия</i>
 </div>
@@ -96,4 +96,3 @@ public/
 ## Обратная связь и поддержка
 
 Автор: [@katarymba](https://github.com/katarymba)
-
