@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectFilteredSortedTodos } from '../features/todos/todosSlice';
+import { selectFilteredSortedTodos } from '../features/todos/todoSlice';
 import TodoItem from './TodoItem';
 
 const TodoList: React.FC = () => {

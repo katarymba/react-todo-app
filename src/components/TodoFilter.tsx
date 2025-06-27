@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter, selectFilter } from '../features/todos/todosSlice';
+import { setFilter, selectFilter } from '../features/todos/todoSlice';
 import { FilterStatus } from '../types';
 
 const TodoFilter: React.FC = () => {

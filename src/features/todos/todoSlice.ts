@@ -1,7 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Todo, FilterStatus, SortOption } from '../../types';
-import { RootState } from '../../store';
 import { v4 as uuidv4 } from 'uuid';
+import { RootState } from '../../store';
+
+export interface Todo {
+  id: string;
+  text: string;
+  completed: boolean;
+  createdAt: number;
+}
+
+export type FilterStatus = 'all' | 'active' | 'completed';
+export type SortOption = 'name' | 'status' | 'created';
 
 interface TodosState {
   items: Todo[];
@@ -9,15 +18,16 @@ interface TodosState {
   sort: SortOption;
 }
 
+const now = Date.now();
 const initialState: TodosState = {
   items: [
-    { id: '1', text: 'Утверждение без подтверждения', completed: true },
-    { id: '2', text: 'Утверждение с подтверждением', completed: true },
-    { id: '3', text: 'Не утверждение', completed: false },
-    { id: '4', text: 'Закрыть', completed: false },
+    { id: '1', text: 'Утверждение без подтверждения', completed: true, createdAt: now - 30000 },
+    { id: '2', text: 'Утверждение с подтверждением', completed: true, createdAt: now - 20000 },
+    { id: '3', text: 'Не утверждение', completed: false, createdAt: now - 10000 },
+    { id: '4', text: 'Закрыть', completed: false, createdAt: now },
   ],
   filter: 'all',
-  sort: 'name',
+  sort: 'created',
 };
 
 export const todosSlice = createSlice({
@@ -25,10 +35,11 @@ export const todosSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action: PayloadAction<string>) => {
-      state.items.push({
+      state.items.unshift({
         id: uuidv4(),
         text: action.payload,
         completed: false,
+        createdAt: Date.now(),
       });
     },
     toggleTodo: (state, action: PayloadAction<string>) => {
@@ -53,17 +64,16 @@ export const { addTodo, toggleTodo, removeTodo, setFilter, setSort } = todosSlic
 
 export const selectFilteredSortedTodos = (state: RootState) => {
   const { items, filter, sort } = state.todos;
-  
   let filteredItems = items;
   if (filter === 'active') {
     filteredItems = items.filter(todo => !todo.completed);
   } else if (filter === 'completed') {
     filteredItems = items.filter(todo => todo.completed);
   }
-  
   return [...filteredItems].sort((a, b) => {
-    if (sort === 'status') {
-      return Number(a.completed) - Number(b.completed);
+    if (sort === 'status' || sort === 'created') {
+      if (a.completed !== b.completed) return a.completed ? 1 : -1;
+      return b.createdAt - a.createdAt;
     }
     return a.text.localeCompare(b.text);
   });

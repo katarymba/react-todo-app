@@ -1,11 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSort, selectSort } from '../features/todos/todosSlice';
-import { SortOption } from '../types';
+import { setSort, selectSort } from '../features/todos/todoSlice';
+import { RootState } from '../store';
+import { SortOption } from '../features/todos/todoSlice';
 
 const TodoSort: React.FC = () => {
   const dispatch = useDispatch();
-  const currentSort = useSelector(selectSort);
+  const currentSort = useSelector((state: RootState) => selectSort(state));
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setSort(e.target.value as SortOption));
@@ -17,6 +18,7 @@ const TodoSort: React.FC = () => {
       <select value={currentSort} onChange={handleSortChange}>
         <option value="name">Наименование</option>
         <option value="status">Статус</option>
+        <option value="created">Дата добавления</option>
       </select>
     </div>
   );

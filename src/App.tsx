@@ -13,11 +13,15 @@ const App: React.FC = () => {
       <div className="app">
         <h1>Список задач</h1>
         <AddTodo />
-        <div className="controls">
-          <TodoFilter />
-          <TodoSort />
+        <div className="todo-main-panel">
+          <div className="todo-left-panel">
+            <TodoList />
+          </div>
+          <div className="todo-right-panel">
+            <TodoFilter />
+            <TodoSort />
+          </div>
         </div>
-        <TodoList />
       </div>
     </Provider>
   );
