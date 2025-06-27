@@ -7,19 +7,20 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f8f8f8;
+  background-color: #ffffff;
 }
 
 .app {
   max-width: 900px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 20px;
 }
 
 h1 {
-  margin: 15px 0;
-  font-size: 24px;
-  font-weight: normal;
+  margin: 20px 0;
+  font-size: 28px;
+  font-weight: 500;
+  color: #333;
 }
 
 /* Блок добавления задачи */
@@ -30,20 +31,20 @@ h1 {
 
 .add-todo-input {
   flex: 1;
-  padding: 8px 10px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   font-size: 14px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .add-todo-button {
-  margin-left: 5px;
-  padding: 8px 15px;
-  background-color: #4568DC;
+  margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #4A90E2;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
   display: flex;
@@ -52,24 +53,28 @@ h1 {
 }
 
 .add-todo-button:hover {
-  background-color: #5A75E2; /* Светлее при наведении */
+  background-color: #357ABD;
 }
 
 .add-todo-button:active {
-  background-color: #0A3AD8; /* Темнее при клике */
+  background-color: #2E6DA4;
 }
 
-.add-todo-button::before {
+.add-todo-button::after {
   content: "+";
-  margin-right: 5px;
+  margin-left: 8px;
   font-size: 16px;
+  font-weight: bold;
 }
 
 /* Блок списка задач */
 .controls {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin: 20px 0;
+  padding: 15px 0;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .todo-filter {
@@ -85,12 +90,16 @@ h1 {
 .todo-filter label {
   display: inline-flex;
   align-items: center;
-  margin-right: 15px;
+  margin-right: 20px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .todo-filter input[type="radio"] {
-  margin-right: 5px;
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  accent-color: #4A90E2;
 }
 
 .todo-sort {
@@ -99,16 +108,18 @@ h1 {
 }
 
 .todo-sort span {
-  margin-right: 5px;
+  margin-right: 8px;
   color: #666;
+  font-size: 14px;
 }
 
 .todo-sort select {
-  padding: 5px 10px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   background-color: white;
   font-size: 14px;
+  cursor: pointer;
 }
 
 /* Таблица с задачами */
@@ -116,25 +127,27 @@ h1 {
   background: white;
   border-collapse: collapse;
   width: 100%;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
   overflow: hidden;
+  border: 1px solid #e0e0e0;
 }
 
 .todo-list h2 {
-  padding: 10px;
-  background: #f5f5f5;
-  border-bottom: 1px solid #eee;
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 500;
+  margin: 0;
 }
 
 /* Элементы списка задач в стиле таблицы */
 .todo-item {
   display: flex;
   align-items: center;
-  padding: 8px 10px;
-  border-bottom: 1px solid #eee;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .todo-item:last-child {
@@ -142,14 +155,17 @@ h1 {
 }
 
 .todo-item input[type="checkbox"] {
-  margin-right: 10px;
-  width: 16px;
-  height: 16px;
+  margin-right: 12px;
+  width: 18px;
+  height: 18px;
+  accent-color: #4A90E2;
+  cursor: pointer;
 }
 
 .todo-item span {
   flex: 1;
   font-size: 14px;
+  line-height: 1.4;
 }
 
 .todo-item .completed {
@@ -160,18 +176,34 @@ h1 {
 .delete-button {
   background: none;
   border: none;
-  color: #ff4d4d;
-  font-size: 18px;
+  color: #dc3545;
+  font-size: 16px;
   cursor: pointer;
-  width: 20px;
-  height: 20px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   margin-left: 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
 }
 
 .delete-button:hover {
-  color: #ff0000;
+  background-color: #f8f9fa;
+  color: #dc3545;
+}
+
+.delete-button::before {
+  content: "🗑️";
+  font-size: 14px;
+}
+
+/* Empty state */
+.todo-empty {
+  padding: 20px;
+  text-align: center;
+  color: #999;
+  font-style: italic;
 }
