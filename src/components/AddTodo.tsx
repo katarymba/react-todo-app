@@ -3,14 +3,21 @@ import { useDispatch } from 'react-redux';
 import { addTodo } from '../features/todos/todoSlice';
 
 const AddTodo: React.FC = () => {
-  const [text, setText] = useState('');
+  const [title, setTitle] = useState('');
   const dispatch = useDispatch();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (text.trim()) {
-      dispatch(addTodo(text.trim()));
-      setText('');
+    if (title.trim()) {
+      dispatch(
+        addTodo({
+          userId: 1,
+          id: Date.now(),
+          title: title.trim(),
+          completed: false,
+        })
+      );
+      setTitle('');
     }
   };
 
@@ -18,8 +25,8 @@ const AddTodo: React.FC = () => {
     <form onSubmit={handleSubmit} className="add-todo">
       <input
         type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         placeholder="Новая задача"
         className="add-todo-input"
       />

@@ -1,9 +1,9 @@
 export interface Todo {
-  id: string;
-  text: string;
+  userId: number;
+  id: number;
+  title: string;
   completed: boolean;
-  createdAt: number;
 }
 
 export type FilterStatus = 'all' | 'active' | 'completed';
-export type SortOption = 'name' | 'status' | 'created';
+export type SortOption = 'name' | 'status';

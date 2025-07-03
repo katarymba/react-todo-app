@@ -1,54 +1,48 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
 import { RootState } from '../../store';
 
+// Структура задачи
 export interface Todo {
-  id: string;
-  text: string;
+  userId: number;
+  id: number;
+  title: string;
   completed: boolean;
-  createdAt: number;
 }
 
+// Типы для фильтрации и сортировки
 export type FilterStatus = 'all' | 'active' | 'completed';
-export type SortOption = 'name' | 'status' | 'created';
+export type SortOption = 'name' | 'status';
 
+// Состояние задач
 interface TodosState {
   items: Todo[];
   filter: FilterStatus;
   sort: SortOption;
 }
 
-const now = Date.now();
 const initialState: TodosState = {
-  items: [
-    { id: '1', text: 'Утверждение без подтверждения', completed: true, createdAt: now - 30000 },
-    { id: '2', text: 'Утверждение с подтверждением', completed: true, createdAt: now - 20000 },
-    { id: '3', text: 'Не утверждение', completed: false, createdAt: now - 10000 },
-    { id: '4', text: 'Закрыть', completed: false, createdAt: now },
-  ],
+  items: [],
   filter: 'all',
-  sort: 'created',
+  sort: 'name',
 };
 
 export const todosSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
-    addTodo: (state, action: PayloadAction<string>) => {
-      state.items.unshift({
-        id: uuidv4(),
-        text: action.payload,
-        completed: false,
-        createdAt: Date.now(),
-      });
+    setTodos: (state, action: PayloadAction<Todo[]>) => {
+      state.items = action.payload;
     },
-    toggleTodo: (state, action: PayloadAction<string>) => {
+    addTodo: (state, action: PayloadAction<Todo>) => {
+      state.items.unshift(action.payload);
+    },
+    toggleTodo: (state, action: PayloadAction<number>) => {
       const todo = state.items.find(todo => todo.id === action.payload);
       if (todo) {
         todo.completed = !todo.completed;
       }
     },
-    removeTodo: (state, action: PayloadAction<string>) => {
+    removeTodo: (state, action: PayloadAction<number>) => {
       state.items = state.items.filter(todo => todo.id !== action.payload);
     },
     setFilter: (state, action: PayloadAction<FilterStatus>) => {
@@ -60,8 +54,9 @@ export const todosSlice = createSlice({
   }
 });
 
-export const { addTodo, toggleTodo, removeTodo, setFilter, setSort } = todosSlice.actions;
+export const { setTodos, addTodo, toggleTodo, removeTodo, setFilter, setSort } = todosSlice.actions;
 
+// Селектор для фильтрации и сортировки задач
 export const selectFilteredSortedTodos = (state: RootState) => {
   const { items, filter, sort } = state.todos;
   let filteredItems = items;
@@ -71,11 +66,11 @@ export const selectFilteredSortedTodos = (state: RootState) => {
     filteredItems = items.filter(todo => todo.completed);
   }
   return [...filteredItems].sort((a, b) => {
-    if (sort === 'status' || sort === 'created') {
-      if (a.completed !== b.completed) return a.completed ? 1 : -1;
-      return b.createdAt - a.createdAt;
+    if (sort === 'status') {
+      return Number(a.completed) - Number(b.completed);
     }
-    return a.text.localeCompare(b.text);
+    // сортировка по алфавиту по title
+    return a.title.localeCompare(b.title);
   });
 };
 
